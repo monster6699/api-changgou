@@ -1,6 +1,7 @@
 package cn.monster.goods.service;
 
 import cn.monster.goods.pojo.Brand;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
@@ -25,4 +26,8 @@ public interface BrandService {
     void deleteBrand(Integer id);
 
     List<Brand> findByBrandLIst(Brand brand);
+
+    PageInfo<Brand> findByPageList(int page, int size);
+
+    PageInfo<Brand> findByPageSelectList(Brand brand, int page, int size);
 }

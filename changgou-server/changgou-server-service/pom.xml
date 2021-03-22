@@ -21,6 +21,11 @@
             <artifactId>changgou-server-common-db</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>cn.monster</groupId>
+            <artifactId>changgou-server-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 
