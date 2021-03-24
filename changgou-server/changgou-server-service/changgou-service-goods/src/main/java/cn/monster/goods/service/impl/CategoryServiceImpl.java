@@ -159,4 +159,13 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> findAll() {
         return categoryMapper.selectAll();
     }
+
+    @Override
+    public List<Category> findByParentId(Integer id) {
+        Category category = new Category();
+        category.setParentId(id);
+        return categoryMapper.select(category);
+    }
+
+
 }

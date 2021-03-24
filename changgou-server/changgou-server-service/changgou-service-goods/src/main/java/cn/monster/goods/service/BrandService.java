@@ -2,6 +2,7 @@ package cn.monster.goods.service;
 
 import cn.monster.goods.pojo.Brand;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -66,4 +67,6 @@ public interface BrandService {
      * @return
      */
     List<Brand> findAll();
+
+    List<Brand> findByCategoryId(Integer categoryId);
 }

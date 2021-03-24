@@ -124,4 +124,15 @@ public class CategoryController {
         List<Category> list = categoryService.findAll();
         return new Result<List<Category>>(true, StatusCode.OK,"查询成功",list) ;
     }
+
+    /***
+     * 查询parent_id
+     * @param id
+     * @return
+     */
+    @GetMapping("/parent/{id}")
+    public Result<List<Category>> findByTemplateById(@PathVariable Integer id) {
+        List<Category> byTemplateId = categoryService.findByParentId(id);
+        return new Result<List<Category>>(true, StatusCode.OK, "查询成功", byTemplateId);
+    }
 }

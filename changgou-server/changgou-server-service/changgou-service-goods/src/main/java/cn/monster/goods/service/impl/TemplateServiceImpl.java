@@ -1,6 +1,8 @@
 package cn.monster.goods.service.impl;
 
+import cn.monster.goods.dao.CategoryMapper;
 import cn.monster.goods.dao.TemplateMapper;
+import cn.monster.goods.pojo.Category;
 import cn.monster.goods.pojo.Template;
 import cn.monster.goods.service.TemplateService;
 import com.github.pagehelper.PageHelper;
@@ -22,6 +24,9 @@ public class TemplateServiceImpl implements TemplateService {
 
     @Autowired
     private TemplateMapper templateMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
 
     /**
@@ -142,5 +147,11 @@ public class TemplateServiceImpl implements TemplateService {
     @Override
     public List<Template> findAll() {
         return templateMapper.selectAll();
+    }
+
+    @Override
+    public Template findTemplateByCategory(Integer categroyId) {
+        Category category = categoryMapper.selectByPrimaryKey(categroyId);
+        return templateMapper.selectByPrimaryKey(category.getTemplateId());
     }
 }
