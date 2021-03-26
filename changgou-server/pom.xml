@@ -13,6 +13,7 @@
         <module>changgou-server-common-db</module>
         <module>changgou-server-api</module>
         <module>changgou-server-service</module>
+        <module>changgou-server-canal</module>
     </modules>
 
     <parent>
