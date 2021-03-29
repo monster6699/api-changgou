@@ -41,7 +41,7 @@ public class CanalDataEventListener {
      */
     @ListenPoint(destination = "example", schema = "changgou_content", table = {"tb_content_category", "tb_content"}, eventType = CanalEntry.EventType.UPDATE)
     public void onEventCustomUpdate(CanalEntry.EventType eventType, CanalEntry.RowData rowData) {
-        System.err.println("DeleteListenPoint");
+        System.err.println("ListenPoint");
         rowData.getAfterColumnsList().forEach((c) -> System.out.println("By--Annotation: " + c.getName() + " ::   " + c.getValue()));
     }
 }

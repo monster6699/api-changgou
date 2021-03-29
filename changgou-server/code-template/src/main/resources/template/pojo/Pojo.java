@@ -8,11 +8,7 @@ import java.io.Serializable;
 <#list typeSet as set>
 import ${set};
 </#list>
-/****
- * @Author:传智播客
- * @Description:${Table}构建
- * @Date 2019/6/14 19:13
- *****/
+
 <#if swagger==true>
 @ApiModel(description = "${Table}",value = "${Table}")
 </#if>
