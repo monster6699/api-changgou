@@ -1,19 +1,15 @@
 package cn.monster.content.controller;
 import cn.monster.content.pojo.Content;
 import cn.monster.content.service.ContentService;
+import cn.monster.entity.Result;
+import cn.monster.entity.StatusCode;
 import com.github.pagehelper.PageInfo;
-import entity.Result;
-import entity.StatusCode;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-/****
- * @Author:传智播客
- * @Description:
- * @Date 2019/6/14 0:18
- *****/
 
 @RestController
 @RequestMapping("/content")
@@ -34,7 +30,7 @@ public class ContentController {
     public Result<PageInfo> findPage(@RequestBody(required = false)  Content content, @PathVariable  int page, @PathVariable  int size){
         //调用ContentService实现分页条件查询Content
         PageInfo<Content> pageInfo = contentService.findPage(content, page, size);
-        return new Result(true,StatusCode.OK,"查询成功",pageInfo);
+        return new Result(true, StatusCode.OK,"查询成功",pageInfo);
     }
 
     /***
@@ -122,5 +118,13 @@ public class ContentController {
         //调用ContentService实现查询所有Content
         List<Content> list = contentService.findAll();
         return new Result<List<Content>>(true, StatusCode.OK,"查询成功",list) ;
+    }
+
+
+    @GetMapping(value = "/list/category/{id}")
+    public Result<List<Content>> findByCategory(@PathVariable Long id){
+        //根据分类ID查询广告集合
+        List<Content> contents = contentService.findByCategoryId(id);
+        return new Result<List<Content>>(true,StatusCode.OK,"查询成功！",contents);
     }
 }

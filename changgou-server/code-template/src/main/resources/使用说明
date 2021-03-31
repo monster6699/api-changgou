@@ -6,7 +6,7 @@ application.properties中配置
     resources/template：模板跟路径
     controller/Controller.java      控制层模板
     dao/Mapper.java                 Dao层模板
-    pojo/Pojo.java                  Model模板
+    cn.monster.content.feign.pojo/Pojo.java                  Model模板
     service/Service.java            业务层接口模板
     service/impl/ServiceImpl.java   业务层接口实现类模板
     swagger/swagger.json            Swagger文档模板

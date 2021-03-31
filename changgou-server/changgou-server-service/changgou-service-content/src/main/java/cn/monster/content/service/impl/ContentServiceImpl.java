@@ -157,7 +157,10 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public List<Content> findByContentId(Integer contentId) {
-        return null;
+    public List<Content> findByCategoryId(Long categoryId) {
+        Content content = new Content();
+        content.setCategoryId(categoryId);
+        return contentMapper.select(content);
     }
+
 }

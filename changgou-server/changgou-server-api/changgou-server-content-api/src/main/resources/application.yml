@@ -1,12 +1,13 @@
 server:
-  port: 18082
+  port: 18084
 spring:
   application:
-    name: canal
-  redis:
-    host: 39.106.78.168
-    port: 6379
-    password: 1241340047chen
+    name: content
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://39.106.78.168:3306/changgou_content
+    username: root
+    password: 123456
 eureka:
   client:
     service-url:
@@ -16,6 +17,10 @@ eureka:
 feign:
   hystrix:
     enabled: true
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true  #开启驼峰功能
+
 #hystrix 配置
 hystrix:
   command:
@@ -26,10 +31,3 @@ hystrix:
           enabled: true
         isolation:
           strategy: SEMAPHORE
-#canal配置
-canal:
-  client:
-    instances:
-      example:
-        host: 39.106.78.168
-        port: 11111
