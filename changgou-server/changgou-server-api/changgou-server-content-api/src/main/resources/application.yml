@@ -7,7 +7,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://39.106.78.168:3306/changgou_content
     username: root
-    password: 123456
+    password: zaq1xsw2
 eureka:
   client:
     service-url:
