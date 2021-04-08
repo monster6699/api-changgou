@@ -3,10 +3,7 @@ server:
 spring:
   application:
     name: search
-  data:
-    elasticsearch:
-      cluster-name: my-application
-      cluster-nodes: 39.106.78.168:9201
+
 eureka:
   client:
     service-url:
@@ -18,7 +15,7 @@ feign:
     enabled: true
 #超时配置
 ribbon:
-  ReadTimeout: 300000
+  ReadTimeout: 3000000
 
 hystrix:
   command:
@@ -26,4 +23,4 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
+            timeoutInMilliseconds: 300000

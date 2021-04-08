@@ -1,12 +1,18 @@
 package cn.monster.search;
 
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class}, scanBasePackages = "cn.monster.*")
 @EnableEurekaClient
+@EnableFeignClients(basePackages = "cn.monster.content.feign")
+@EnableElasticsearchRepositories(basePackages = "cn.monster.search.dao")
+@Configurable()
 public class SearchApplication {
 
     public static void main(String[] args) {
