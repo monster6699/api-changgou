@@ -8,13 +8,24 @@ import cn.monster.search.pojo.SkuInfo;
 import cn.monster.search.service.SkuService;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.util.StringUtil;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class SkuServiceImpl implements SkuService {
@@ -48,7 +59,20 @@ public class SkuServiceImpl implements SkuService {
         if(StringUtil.isEmpty(keyWords)) {
             keyWords = "华为";
         }
-//        elasticsearchRestTemplate.search();
-        return  null;
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder();
+//        nativeSearchQueryBuilder.addAggregation(AggregationBuilders.terms("skuCategoryGroup").field("categoryName").size(50));
+        nativeSearchQueryBuilder.withQuery(QueryBuilders.matchQuery("name", keyWords));
+        NativeSearchQuery query = nativeSearchQueryBuilder.build();
+        SearchHits<SkuInfo> search = elasticsearchRestTemplate.search(query, SkuInfo.class);
+        //6.返回结果
+//        Aggregations aggregations = search.getAggregations();
+//        Aggregation skuCategoryGroup = aggregations.get("skuCategoryGroup");
+//        System.out.println(skuCategoryGroup);
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        List<SkuInfo> collect = search.getSearchHits().stream().map(info -> info.getContent()).collect(Collectors.toList());
+        resultMap.put("rows", collect);
+        resultMap.put("total", search.getTotalHits());
+        return  resultMap;
     }
 }
